@@ -1,85 +1,45 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <main>
+    <!-- Date -->
+    <div class="text-center mb-6">
+      {{
+        new Date().toLocaleDateString('en-us', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
+      }}
     </div>
-  </header>
 
-  <RouterView />
+    <!-- search input -->
+    <div>
+      <SearchInput @place-data="addPlace" />
+    </div>
+
+    <!-- weather card -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div v-for="(place, index) in places" :key="index">
+        <WeatherCard :place="place" @delete-place="deletePlace" />
+      </div>
+    </div>
+  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script setup>
+import { ref } from 'vue'
+import SearchInput from './components/SearchInput.vue'
+import WeatherCard from './components/WeatherCard.vue'
+
+const places = ref([])
+
+const addPlace = (data) => {
+  places.value.push(data)
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+const deletePlace = (name) => {
+  if (confirm('Are you sure ??')) {
+    places.value = places.value.filter((p) => p.location.name !== name)
   }
 }
-</style>
+</script>
