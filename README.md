@@ -10,26 +10,53 @@ Build weather app with VueJS
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Project Setup
+## Requirements
 
-```sh
+- Node20
+
+## Build Setup
+
+### Install dependencies
+
+```
+
 npm install
+
 ```
 
-### Compile and Hot-Reload for Development
+### Start website in dev mode using
 
-```sh
+```
+
 npm run dev
+
 ```
 
-### Compile and Minify for Production
+### Compiles and minifies for production
 
-```sh
+```
+
 npm run build
+
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
-```sh
+```
 npm run lint
 ```
+
+# key Features
+
+## [VueJs](https://vuejs.org/)
+
+- It is used to build web interfaces and one-page applications.
+
+## [Tailwind CSS](https://tailwindcss.com/)
+
+- A utility-first CSS framework packed with classes like flex, pt-4, my-4 and text-center that can be composed to build any design, directly in your markup.
+
+## [Weathwe API](https://www.weatherapi.com/)
+
+- Rendering the weather information through the api.
+- This Api provide the Real Time, Forecasted, Future, Marine and Historical Weather response.
